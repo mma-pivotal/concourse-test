@@ -1,0 +1,25 @@
+---
+resources:
+  - name: concourse-test
+    type: git
+    icon: github-circle
+    source:
+      uri: https://github.com/mma-pivotal/concourse-test
+
+jobs:
+  - name: ls-1st
+    public: true
+    plan:
+      - get: concourse-test
+        trigger: true
+      - task: list-1st
+        config:
+          inputs:
+            - name: concourse-test
+          platform: linux
+          image_resource:
+            type: registry-image
+            source: { repository: busybox }
+          run:
+            path: ls
+            args: ["-la", "1st/"]
