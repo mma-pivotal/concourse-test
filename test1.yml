@@ -11,7 +11,7 @@ jobs:
     public: true
     plan:
       - get: concourse-test
-        trigger: true
+#        trigger: true
       - task: list-1st
         config:
           inputs:
@@ -28,6 +28,8 @@ jobs:
     plan:
       - get: concourse-test
         trigger: true
+        passed: 
+        - ls-1st
       - task: list-2nd
         config:
           inputs:
